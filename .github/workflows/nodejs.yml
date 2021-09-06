@@ -28,3 +28,14 @@ jobs:
     - run: npm run build:prod
       env:
         CI: true
+    - uses: Azure/docker-login@v1
+      with:
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        cp ./dist ./scripts/
+        ref=${{ github.ref }}
+        docker build scripts -t goadminteam/go-admin:${ref##*/}-${{ github.sha }}
+        docker tag goadminteam/go-admin:${ref##*/}-${{ github.sha }} goadminteam/go-admin:latest
+        docker push goadminteam/go-admin:${ref##*/}-${{ github.sha }}
+        docker push goadminteam/go-admin:latest
