@@ -35,7 +35,7 @@ jobs:
     - run: |
         cp ./dist ./scripts/
         ref=${{ github.ref }}
-        docker build scripts -t goadminteam/go-admin:${ref##*/}-${{ github.sha }}
-        docker tag goadminteam/go-admin:${ref##*/}-${{ github.sha }} goadminteam/go-admin:latest
-        docker push goadminteam/go-admin:${ref##*/}-${{ github.sha }}
-        docker push goadminteam/go-admin:latest
+        docker build scripts -t goadminteam/go-admin-ui:${ref##*/}-${{ github.sha }}
+        docker tag goadminteam/go-admin-ui:${ref##*/}-${{ github.sha }} goadminteam/go-admin-ui:latest
+        docker push goadminteam/go-admin-ui:${ref##*/}-${{ github.sha }}
+        docker push goadminteam/go-admin-ui:latest
