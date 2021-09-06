@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -33,7 +33,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        cp ./dist ./scripts/
+        cp -r ./dist ./scripts/
         ref=${{ github.ref }}
         docker build scripts -t goadminteam/go-admin-ui:${ref##*/}-${{ github.sha }}
         docker tag goadminteam/go-admin-ui:${ref##*/}-${{ github.sha }} goadminteam/go-admin-ui:latest
